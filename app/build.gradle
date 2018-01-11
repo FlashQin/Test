@@ -1,0 +1,54 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
+
+    defaultConfig {
+        applicationId "com.zf.compey"
+        minSdkVersion 19
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.ashokvarma.android:bottom-navigation-bar:1.2.0'
+    // dibu daohang
+    compile 'com.google.code.gson:gson:2.8.2'
+    //Gooloog gson
+    compile 'com.squareup.okio:okio:1.13.0'
+    //okhttp
+    compile 'com.tsy:myokhttp:1.1.3'
+    //okhttp
+    compile 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+    //okhttp
+    //noinspection GradleCompatible
+    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.jakewharton:butterknife:6.1.0'
+    //zhujie
+    //jiazai donghua
+    compile 'cn.yipianfengye.android:zxing-library:2.2'
+    //erweima saomiao
+    compile 'com.gyf.barlibrary:barlibrary:2.3.0'
+    //chengjingshi
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    //tu pian jiazai
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    //tu pian jiazai
+    compile 'com.github.hotchemi:permissionsdispatcher:2.4.0'
+    //quanxian shenqing
+    apt 'com.github.hotchemi:permissionsdispatcher-processor:2.4.0'
+    //quanxian shenqing
+
+}

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ZF</string>
+    <string name="firstpage_name">中防溯源生产管理客户端</string>
+    <string name="account_logain_name">account</string>
+    <string name="password_logain_name">password</string>
+    <string name="loading_content_page">loading...</string>
+</resources>

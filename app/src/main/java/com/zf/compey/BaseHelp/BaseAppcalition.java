@@ -1,0 +1,77 @@
+package com.zf.compey.BaseHelp;
+
+import android.app.Application;
+
+import com.franmontiel.persistentcookiejar.ClearableCookieJar;
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.tsy.sdk.myokhttp.MyOkHttp;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
+
+import java.util.concurrent.TimeUnit;
+
+
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+
+
+/**
+ * ( )Created by ${Ethan_Zeng} on 2017/11/6.
+ */
+
+public class BaseAppcalition extends Application{
+    private static BaseAppcalition mInstance;
+    private MyOkHttp mMyOkHttp;
+    private DownloadMgr mDownloadMgr;
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        mInstance = this;
+
+        ZXingLibrary.initDisplayOpinion(this);// erweima kuangjia chushihua
+
+
+        //持久化存储cookie
+        ClearableCookieJar cookieJar =
+                new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(getApplicationContext()));
+
+        //log拦截器
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        //自定义OkHttp
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(10000L, TimeUnit.MILLISECONDS)
+                .readTimeout(10000L, TimeUnit.MILLISECONDS)
+                .cookieJar(cookieJar)       //设置开启cookie
+                .addInterceptor(logging)            //设置开启log
+                .build();
+        mMyOkHttp = new MyOkHttp(okHttpClient);
+
+        //默认
+//        mMyOkHttp = new MyOkHttp();
+
+        mDownloadMgr = (DownloadMgr) new DownloadMgr.Builder()
+                .myOkHttp(mMyOkHttp)
+                .maxDownloadIngNum(5)       //设置最大同时下载数量（不设置默认5）
+                .saveProgressBytes(50 * 1204)   //设置每50kb触发一次saveProgress保存进度 （不能在onProgress每次都保存 过于频繁） 不设置默认50kb
+                .build();
+
+        mDownloadMgr.resumeTasks();     //恢复本地所有未完成的任务
+    }
+
+    public static synchronized BaseAppcalition getInstance() {
+        return mInstance;
+    }
+
+
+    public MyOkHttp getMyOkHttp() {
+        return mMyOkHttp;
+    }
+
+    public DownloadMgr getDownloadMgr() {
+        return mDownloadMgr;
+    }
+}
+

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+<LinearLayout
+    android:id="@+id/lin_isshow_fragmenthome"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:visibility="visible"
+    android:layout_height="wrap_content">
+    <com.zf.compey.views.BannerLayout
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:autoPlayDuration="4000"
+        app:indicatorMargin="10dp"
+        app:indicatorPosition="rightBottom"
+        app:indicatorShape="oval"
+        app:indicatorSpace="3dp"
+        app:isAutoPlay="true"
+        app:scrollDuration="600"
+        app:selectedIndicatorColor="@color/red"
+        app:selectedIndicatorHeight="8dp"
+        app:selectedIndicatorWidth="8dp"
+        app:unSelectedIndicatorColor="#99ffffff"
+        app:unSelectedIndicatorHeight="6dp"
+        app:unSelectedIndicatorWidth="6dp" />
+
+    <GridView
+        android:id="@+id/gridview_home"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:cacheColorHint="#00000000"
+        android:gravity="center_horizontal"
+        android:horizontalSpacing="5dp"
+        android:listSelector="#00000000"
+        android:numColumns="3"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="5dp">
+
+    </GridView>
+</LinearLayout>
+</LinearLayout>
